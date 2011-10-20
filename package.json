@@ -1,9 +1,9 @@
 {
-  "name": "my_package",
-  "summary": "Short package description",
-  "description": "Long package description",
-  "homepage": "http://mypackage.com",
-  "author": "Your Name",
+  "name": "SproutCore-LocalStorage",
+  "summary": "LocalStorage interface for SproutCore 2.x",
+  "description": "LocalStorage interface for SproutCore 2.x",
+  "homepage": "https://github.com/joubertnel/sproutcore-localstorage",
+  "author": "Joubert Nel"
   "version": "1.0.0",
 
   "directories": {
