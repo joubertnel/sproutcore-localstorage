@@ -26,17 +26,3 @@ describe('LocalStorage', function() {
 
 });
 
-
-// module("LocalStorage", {
- 	   
-//  	  setup: function() {
-//  	    obj = SC.Object.create({ bck : 'green' }); 	
-//  	}
-// });
-
-
-
-// test("To check if the KV pairs are stored and read from local storage", function() {
-//   SC.localStorage.writeValue('Back', obj.bck);
-//   equals(SC.localStorage.readValue('Back'), obj.bck, 'can read written value');
-// });

@@ -16,3 +16,6 @@ prefixed to key names with no slashes in them.
 ```javascript
 SC.localStorage.getPath('global:contactInfo.userName');
 ```
+
+To run the specs, start `bpm preview` and then navigate to `http://localhost:4020/assets/spade-jasmine/index.html?package=sproutcore-localstorage`
+
