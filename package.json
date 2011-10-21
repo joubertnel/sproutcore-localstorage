@@ -1,18 +1,34 @@
 {
-  "name": "SproutCore-LocalStorage",
-  "summary": "LocalStorage interface for SproutCore 2.x",
-  "description": "LocalStorage interface for SproutCore 2.x",
+  "name": "sproutcore-localstorage",
+  "summary": "HTML5 LocalStorage interface for SproutCore 2.x",
+  "description": "HTML5 LocalStorage interface for SproutCore 2.x",
   "homepage": "https://github.com/joubertnel/sproutcore-localstorage",
-  "author": "Joubert Nel"
-  "version": "1.0.0",
-
+  "author": "Joubert Nel",
+  "version": "2.0.0.alpha",
   "directories": {
     "lib": "lib"
   },
-  
   "bpm:build": {
     "bpm_libs.js": {
-      "files": ["lib"]
+      "files": [
+        "lib"
+      ],
+      "modes": "*"
+    },
+    "sproutcore-localstorage/bpm_tests.js": {
+      "files": [
+        "specs"
+      ]
     }
+  },
+  "dependencies": {
+    "spade": "~> 1.0",
+    "jquery": ">= 0",
+    "sproutcore-runtime": "2.0.beta.3"
+  },
+  "bpm": "1.0.0",
+  "dependencies:development": {
+    "jasmine": ">= 0.pre",
+    "spade-jasmine": ">= 0.pre"
   }
 }
