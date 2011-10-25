@@ -14,14 +14,22 @@
 describe('LocalStorage', function() {
   var theKey = 'mar';
   var theVal = 'tini';
+  var storage = SC.LocalStorage.create();
+
+  beforeEach(function() {
+    window.localStorage.clear();
+  });
   
-  it('is sane', function() {
-    expect(true).toBeTruthy();
+  it('stores and retrieves KV pairs from HTML5 local storage', function() {
+    storage.writeValue(theKey, theVal);
+    expect(storage.readValue(theKey)).toEqual(theVal);
+    expect(window.localStorage.length).toEqual(1);
   });
 
-  it('stores and retrieves KV pairs from HTML5 local storage', function() {
-    SC.localStorage.writeValue(theKey, theVal);
-    expect(SC.localStorage.readValue(theKey)).toEqual(theVal);
+  it('supports set/get semantics', function() {
+    storage.set(theKey, theVal);
+    expect(storage.get(theKey)).toEqual(theVal);
+    expect(window.localStorage.length).toEqual(1);
   });
 
 });
