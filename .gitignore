@@ -1,6 +1,6 @@
 .bpm/
 .spade/
-.strobe/
+strobe/
 *~
 assets/
 eproject.cfg
