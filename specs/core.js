@@ -10,15 +10,26 @@
 // ========================================================================
 /*globals module test ok isObj equals expects */
 
-var localStorage = SC.LocalStorage.create({appDomain:'LocalStorageTest'});
+var storage = SC.LocalStorage.create({appDomain:'LocalStorageTest'});
 
 describe('LocalStorage', function() {
   var theKey = 'mar';
   var theVal = 'tini';  
 
-  it('stores and retrieves KV pairs from HTML5 local storage in a bindings-compatible way', function() {
-    localStorage.set(theKey, theVal);
-    expect(localStorage.get(theKey)).toEqual(theVal);
+  beforeEach(function() {
+    window.localStorage.clear();
+  });
+  
+  it('stores and retrieves KV pairs from HTML5 local storage', function() {
+    storage.writeValue(theKey, theVal);
+    expect(storage.readValue(theKey)).toEqual(theVal);
+    expect(window.localStorage.length).toEqual(1);
+  });
+
+  it('supports set/get semantics', function() {
+    storage.set(theKey, theVal);
+    expect(storage.get(theKey)).toEqual(theVal);
+    expect(window.localStorage.length).toEqual(1);
   });
 
 });
