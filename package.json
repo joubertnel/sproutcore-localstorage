@@ -4,7 +4,7 @@
   "description": "HTML5 LocalStorage interface for SproutCore 2.x",
   "homepage": "https://github.com/joubertnel/sproutcore-localstorage",
   "author": "Joubert Nel",
-  "version": "2.0.beta.5",
+  "version": "2.0.beta.6",
   "directories": {
     "lib": "lib"
   },

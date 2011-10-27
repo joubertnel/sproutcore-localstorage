@@ -8,28 +8,85 @@
 // ========================================================================
 // SC.LocalStorage Core Tests
 // ========================================================================
-/*globals module test ok isObj equals expects */
+/*globals App describe afterEach beforeEach it expect */
 
-var storage = SC.LocalStorage.create({appDomain:'LocalStorageTest'});
+
+App = SC.Application.create({
+  storage: SC.LocalStorage.create({appDomain:'LocalStorageTest',
+                                   userDomain:'UberDuber'}),
+  currentSumerBinding: 'storage.sumer'
+});
+
 
 describe('LocalStorage', function() {
-  var theKey = 'mar';
-  var theVal = 'tini';  
 
-  beforeEach(function() {
+  afterEach(function() {
     window.localStorage.clear();
   });
   
+  beforeEach(function() {
+    window.localStorage.clear();
+    App.get('storage').defaults();
+  });
+  
   it('stores and retrieves KV pairs from HTML5 local storage', function() {
-    storage.writeValue(theKey, theVal);
-    expect(storage.readValue(theKey)).toEqual(theVal);
+    App.setPath('storage.mar', 'tini');
+    expect(App.getPath('storage.mar')).toEqual('tini');
     expect(window.localStorage.length).toEqual(1);
   });
+  
 
-  it('supports set/get semantics', function() {
-    storage.set(theKey, theVal);
-    expect(storage.get(theKey)).toEqual(theVal);
-    expect(window.localStorage.length).toEqual(1);
+  describe('defaults', function() {
+
+    beforeEach(function() {
+      App.get('storage').defaults({'sumer': 'imhotep'},
+                                  {'mar': 'tini'});
+
+      App.setPath('storage.mar', 'vel');
+      SC.run.sync();
+    });
+
+    it('prioritizes the value in localStorage over a default value', function() {
+      expect(App.getPath('storage.mar')).toEqual('vel');
+    });
+
+    it('returns the default if key is not in localStorage', function() {
+      expect(App.getPath('storage.sumer')).toEqual('imhotep');
+    });
+
+    it('notifies the runtime when defaults change', function() {
+      expect(App.get('currentSumer')).toEqual('imhotep');
+      App.get('storage').defaults({'sumer': 'ra'});
+      SC.run.sync();
+      expect(App.get('currentSumer')).toEqual('ra');
+    });
+
+  });
+
+  xdescribe('userDomain', function() {
+
+    var watcher;
+
+    beforeEach(function() {
+      App.setPath('storage.mar', 'tini');
+      
+      watcher = SC.Object.create({
+        weWereNotified: NO,
+        
+        marDidChange: function() {
+          this.set('weWereNotified', YES);
+        }.observes('App.storage.mar')
+      });
+      
+      SC.run.sync();
+    });
+
+    it('notifies the runtime that all properties have changed when the userDomain changes', function() {
+      expect(watcher.get('weWereNotified')).toEqual(NO);
+      App.setPath('storage.userDomain', 'Nosferatu');
+      SC.run.sync();
+      expect(watcher.get('weWereNotified')).toEqual(YES);      
+    });
   });
 
 });
